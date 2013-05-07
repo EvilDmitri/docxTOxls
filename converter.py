@@ -29,6 +29,7 @@ document = opendocx('bhrec.docx')
 # Load tables
 tblList = document.xpath('//w:tbl', namespaces=document.nsmap)
 
+
 def parse_first_table():
     first_table = tblList[0]
     row_number = 0
@@ -37,7 +38,7 @@ def parse_first_table():
         if line.__len__():
             col_number = 0
             for cell in line:
-                sheet_1.write(row_number, col_number, cell.strip(), style)
+                sheet_1.write(row_number, col_number, cell.strip())
                 col_number += 1
 
         row_number += 1
@@ -51,12 +52,12 @@ def parse_second_table():
         if line.__len__():
 
             if line.__len__() == 1:
-                sheet_2.write_merge(row_number, row_number, 0, 4, line[0])
+                sheet_1.write_merge(row_number, row_number, 4, 8, line[0], style)
 
             elif line.__len__() > 4:
-                col_number = 0
+                col_number = 4
                 for cell in line:
-                    sheet_2.write(row_number, col_number, cell.strip())
+                    sheet_1.write(row_number, col_number, cell.strip(), style)
                     col_number += 1
 
 
